@@ -1,0 +1,53 @@
+<div class="container">
+    <h1> to-do</h1>
+  <hr>   <!-- horizontal line-->
+<form (ngSubmit)="onSubmit(taskform)" #taskform="ngForm">
+    <div class="form-group">
+      <label for="task">Task</label>
+      <input
+       type="text"
+        class="form-control" 
+        id="example"
+       placeholder="Enter task" 
+       required
+       ngModel name="task"> <!--directives -->
+     
+       <small  *ngIf="taskform.invalid && taskform.dirty" id="error message" class="form-text text-danger">required field</small>
+    <!--When a form control is marked as dirty, it means the user has interacted with it and modified its value since 
+    the form was initialized.-->
+      </div>
+    
+    <button id="submitbutton" 
+    [disabled]="taskform.invalid"
+    type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>    
+        <th scope="col">Task</th>
+        <th scope="col">Completed</th>
+        <th scope="col">Delete</th> 
+        <!-- <th scope="col">Edit</th>  -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of task, index as i">
+    
+        <td>{{t.taskName}}</td>
+        <td><input  (change) = "onCheck(i)"type="checkbox" id="myCheckbox">    </td>
+
+        <td><button class="colr-button" (click)="onDelete(i)">Delete</button></td>
+
+<!--         
+<td>
+  <button class="colr-button" (click)="onEdit(i)">Edit</button>
+</td> -->
+
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+</div>
